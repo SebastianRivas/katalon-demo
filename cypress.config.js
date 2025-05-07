@@ -1,41 +1,36 @@
-const { defineConfig } = require("cypress");
-const webpack  = require('@cypress/webpack-preprocessor');
-const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor');
+import { defineConfig } from "cypress";
+import { writeFileSync } from "fs";
+import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
+import { addCucumberPreprocessorPlugin, afterRunHandler, } from "@badeball/cypress-cucumber-preprocessor";
+import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esbuild";
 
 async function setupNodeEvents(on, config) {
   await addCucumberPreprocessorPlugin(on, config);
 
   on(
     "file:preprocessor",
-    webpack({
-      webpackOptions: {
-        resolve: {
-          extensions: [".ts", ".js"],
-        },
-        module: {
-          rules: [
-            {
-              test: /\.feature$/,
-              use: [
-                {
-                  loader: "@badeball/cypress-cucumber-preprocessor/webpack",
-                  options: config,
-                },
-              ],
-            },
-          ],
-        },
-      },
+    createBundler({
+      plugins: [createEsbuildPlugin(config)],
     })
   );
+
+  on("after:run", async (results) => {
+    if (results) {
+      await afterRunHandler(config);
+      writeFileSync("cypress/results/test-data.json", JSON.stringify(results));
+    }
+  });
 
   return config;
 }
 
-module.exports = defineConfig({
+export default defineConfig({
   e2e: {
-    specPattern: "cypress/features/**/*.feature",
-    baseUrl: 'https://katalon-demo-cura.herokuapp.com',
-    setupNodeEvents
-  }
+    specPattern: "cypress/e2e/features/**/*.feature",
+    supportFile: "cypress/support/e2e.js",
+    baseUrl: "https://katalon-demo-cura.herokuapp.com",
+    chromeWebSecurity: false,
+    video: false,
+    setupNodeEvents,
+  },
 });

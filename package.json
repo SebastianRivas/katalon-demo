@@ -2,21 +2,29 @@
   "name": "katalon-demo",
   "version": "1.0.0",
   "description": "Automated tests",
-  "license": "ISC",
   "author": "juan.sebastian.rivas@correounivalle.edu.co",
+  "license": "ISC",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "cypress-open": "cypress open",
-    "cypress-run": "cypress run"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cucumber:report": "node cucumber-html-report.js"
   },
+  "keywords": [
+    "cypress",
+    "cucumber",
+    "testing",
+    "pom"
+  ],
   "dependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
-    "@cypress/webpack-preprocessor": "^6.0.2",
-    "cypress": "^14.0.0",
-    "webpack": "^5.97.1"
-  },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": false
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
+    "cypress": "^14.3.2",
+    "cypress-multi-reporters": "^2.0.5",
+    "multiple-cucumber-html-reporter": "^3.9.2",
+    "eslint": "^9.25.1",
+    "eslint-plugin-cypress": "^4.3.0",
+    "esbuild": "^0.25.3"
   }
 }
