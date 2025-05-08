@@ -1,6 +1,6 @@
-import PageObject from "../../page_objects/PageObject.js";
+import { PageObject } from "../PageObject";
 
-class HomePage extends PageObject {
+export class HomePage extends PageObject {
   get makeAppointmentButton() {
     return 'a[id="btn-make-appointment"]';
   }
@@ -39,5 +39,3 @@ class HomePage extends PageObject {
     this.click(this.goToLoginButton);
   }
 }
-
-export default new HomePage();

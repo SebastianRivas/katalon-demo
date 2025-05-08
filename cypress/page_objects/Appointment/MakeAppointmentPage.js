@@ -1,6 +1,6 @@
-import PageObject from "../../page_objects/PageObject.js";
+import { PageObject } from "../PageObject";
 
-class MakeAppointmentPage extends PageObject {
+export class MakeAppointmentPage extends PageObject {
   get facilitySelect() {
     return 'select[id="combo_facility"]';
   }
@@ -91,5 +91,3 @@ class MakeAppointmentPage extends PageObject {
     this.clickBookAppointment();
   }
 }
-
-export default new MakeAppointmentPage();

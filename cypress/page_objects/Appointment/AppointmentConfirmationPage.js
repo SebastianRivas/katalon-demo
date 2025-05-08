@@ -1,6 +1,6 @@
-import PageObject from "../../page_objects/PageObject.js";
+import { PageObject } from "../PageObject";
 
-class AppointmentConfirmationPage extends PageObject {
+export class AppointmentConfirmationPage extends PageObject {
   get facilityText() {
     return 'p[id="facility"]';
   }
@@ -39,5 +39,3 @@ class AppointmentConfirmationPage extends PageObject {
     this.assertInvoke(this.commentText, "text", summaryData.comment);
   }
 }
-
-export default new AppointmentConfirmationPage();

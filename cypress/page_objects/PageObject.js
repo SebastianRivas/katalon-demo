@@ -1,4 +1,4 @@
-export default class PageObject {
+export class PageObject {
   visit(path) {
     cy.visit(path);
   }

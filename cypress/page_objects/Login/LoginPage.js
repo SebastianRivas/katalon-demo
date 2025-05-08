@@ -1,6 +1,6 @@
-import PageObject from "../../page_objects/PageObject.js";
+import { PageObject } from "../PageObject";
 
-class LoginPage extends PageObject {
+export class LoginPage extends PageObject {
   get usernameInput() {
     return 'input[id="txt-username"]';
   }
@@ -35,5 +35,3 @@ class LoginPage extends PageObject {
     this.clickLogin();
   }
 }
-
-export default new LoginPage();
